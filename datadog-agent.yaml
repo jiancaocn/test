@@ -1,0 +1,38 @@
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    tags:
+      - env:test
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+  features:
+    apm:
+      instrumentation:
+        enabled: true
+        enabledNamespaces:
+          - otel-demo
+        libVersions:
+          java: v1.32.0
+          js: v5.11.0
+          python: v2.8.2
+          dotnet: v2.50.0
+          ruby: v1.22.0
+    logCollection:
+      enabled: true
+      containerCollectAll: true
+    cws:
+      enabled: true
+    cspm:
+      enabled: true
+    sbom:
+      containerImage:
+        enabled: true
+    usm:
+      enabled: true
+    npm:
+      enabled: true
